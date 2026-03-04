@@ -105,7 +105,7 @@ please down load our dataset <a href="https://drive.google.com/file/d/1fgszPqmtd
 <br>
 We used the following 8 classes and colors mapping table to generate the <b>Congenital-Heart-Disease-miccai19-subset</b>
  with colorized masks from the <b>CHD68_segmentation_dataset_miccai19</b> dataset.<br><br>
-<a id="color-class-mapping-table"><b>Lumbar-Spine color class mapping table</b></a>
+<a id="color-class-mapping-table"><b>Congenital Heart Disease color class mapping table</b></a>
 <br> 
 <table border=1 style='border-collapse:collapse;' cellpadding='5'>
 <tr><th>Indexed Color</th><th>Color</th><th>RGB</th><th>Class</th></tr>
