@@ -1,6 +1,11 @@
-<h2>TensorFlow-FlexUNet-Image-Segmentation-Congenital-Heart-Disease (2026/03/01)</h2>
+<h2>TensorFlow-FlexUNet-Image-Segmentation-Congenital-Heart-Disease (2026/05/09)</h2>
 Sarah T.  Arai<br>
-Software Laboratory antillia.com<br><br>
+Software Laboratory antillia.com<br>
+<ul>
+<li>2026/05/09: Added infer3d method to <a href="./src/TensorFlowFlexModel.py">TensorFlowFexModel</a> class, 
+and ran 5.infer3d.bat.</li>
+<li>2026/05/09: Generated overlays.gif from maskoverlay PNG files by running 6.video3d.bat</li>.
+</ul>
 This is the first experiment of Image Segmentation for <b>Congenital Heart Disease (CHD) miccai19</b> based on our <a href="./src/TensorFlowFlexUNet.py">TensorFlowFlexUNet</a> 
 (TensorFlow Flexible UNet Image Segmentation Model for Multiclass), 
 and a 512x512 pixels PNG 
@@ -55,14 +60,15 @@ The following explanation was taken from the kaggle.com web site.
 A dataset of whole heart and great vessel segmentation of chd_segmentation is published.<br>
 
 Our dataset includes 68 CT images with labels. The label includes:<br>
- left ventricle (label: 1), <br>
- right ventricle (label: 2), <br>
- left atrium (label: 3), <br>
-right atrium (label: 4), <br>
-myocardium (label: 5), <br>
-aorta (label: 6), and <br> 
-pulmonary artery (label: 7).<br>
-<br>
+<pre>
+  left ventricle (label: 1), 
+  right ventricle (label: 2),
+  left atrium (label: 3), 
+  right atrium (label: 4),
+  myocardium (label: 5), 
+  aorta (label: 6), and  
+  pulmonary artery (label: 7).
+</pre>
 You notice other labels such 14 etc., you can just ignore them as they are labels corresponding to airways etc.<br>
 <br>
 Our dataset is available at https://notredame.box.com/v/chdsegmentationdataset, and please send emails to Prof. Yiyu Shi yshi4@nd.edu for the password.
@@ -321,6 +327,108 @@ As shown below, the inferred masks predicted by our segmentation model trained b
 </tr>
 </table>
 <hr>
+<br>
+<br>
+<h3>
+6 3D Volume Segmentation
+</h3>
+Please move <b>./projects/TensorFlowFlexUNet/Congenital-Heart-Disease</b> folder, and run the following bat file to infer images segmentation for 2D slices of 3D volume NIfTI files
+ by the Trained-TensorFlowFlexUNet model for Congenital-Heart-Disease.<br>
+<pre>
+>./5.infer3d.bat
+</pre>
+This simply runs the following command.
+<pre>
+>python ../../../src/TensorFlowFlexUNet3DInferencer.py ./train_eval_infer.config
+</pre>
+
+<b>infer3d section </b> in <a href="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/train_eval_infer.config">
+train_eval_infer.config
+<a></b>
+<pre>
+[infer3d] 
+;Specify an images_dir which contains NIfTI files
+images_dir    = "./mini_test_3d/images/"
+output_dir    = "./mini_test_3d_output/"
+slice_shape_order = "hwd"
+slice_resize   = (512,512)
+slice_rotation = cv2.ROTATE_90_CLOCKWISE 
+mask_overlay  = True
+</pre>
+<hr>
+<b>Acutual Image Segmentation for 2D Slices of a Congenital-Heart-Disease NIfTI</b><br>
+Some Slices, Inferred Masks and Mask overlays for a 3D volume <b>ct_1046_image.nii.gz</b> file.<br>
+<br>
+<a href="#color-class-mapping-table">Color class mapping table</a>
+<br>
+<table>
+<tr>
+<th>Input: Slice</th>
+<th>Prediction: Inferred mask</th>
+<th>Mask Overlay</th>
+</tr>
+<tr>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/slices/10068.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/masks/10068.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/overlays/10068.png" width="320" height="auto"></td>
+</tr>
+<tr>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/slices/10075.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/masks/10075.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/overlays/10075.png" width="320" height="auto"></td>
+</tr>
+<tr>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/slices/10082.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/masks/10082.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/overlays/10082.png" width="320" height="auto"></td>
+</tr>
+<tr>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/slices/10087.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/masks/10087.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/overlays/10087.png" width="320" height="auto"></td>
+</tr>
+<tr>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/slices/10092.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/masks/10092.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/overlays/10092.png" width="320" height="auto"></td>
+</tr>
+<tr>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/slices/10106.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/masks/10106.png" width="320" height="auto"></td>
+<td><img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/mini_test_3d_output/ct_1046_image.nii.gz/overlays/10106.png" width="320" height="auto"></td>
+</tr>
+</table>
+<hr>
+<br>
+<br>
+<h3>
+7 MaskOverlay Video of 3D Volume Segmentation
+</h3>
+Please move to <b>./projects/TensorFlowFlexUNet/Congenital-Heart-Disease</b> folder, and run the following bat file 
+to generate <b>overlays.mp4</b> or <b>overlay.gif</b> for MaskOverlays of 3D Volume Segmentation. <br>
+<pre>
+>./6.video3d.bat
+</pre>
+This simply runs the following command.
+<pre>
+>python ../../../src/MaskOverlayVideoGenerator.py ./train_eval_infer.config
+</pre>
+<br>
+
+<b>infer3d section </b> in <a href="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/train_eval_infer.config">
+train_eval_infer.config
+<a></b>
+
+<pre>
+[infer3d] 
+mask_overlay  = True
+;Specify ".mp4" or ".gif".
+;video_fileformat  = ".mp4"
+video_fileformat  = ".gif"
+</pre>
+<br>
+<b>overlays.gif</b><br>
+<img src="./projects/TensorFlowFlexUNet/Congenital-Heart-Disease/video_3d/overlays.gif">
 <br>
 <h3>
 References
